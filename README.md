@@ -1,151 +1,129 @@
-# 🌊 Sedimentation Analysis
+# 🧠 AI-Based Text Emotion Detection using BiGRU
 
-A software project focused on **sedimentation analysis**. This repository contains the source code and resources for the project.
+An AI-powered text emotion detection application that analyzes user-written text and predicts the emotion expressed in it using a **Bidirectional Gated Recurrent Unit (BiGRU)** deep-learning model.
 
-## 📌 Overview
-
-Sedimentation analysis is the process of studying how suspended particles settle in a fluid under the influence of gravity. This project aims to provide a software-based approach to working with sedimentation-related data and analysis.
+The application uses **TensorFlow/Keras** for model inference, **FastAPI** for the backend API, and a static web interface for user interaction. It returns the predicted emotion, a corresponding emoji, confidence score, and probability scores for all supported emotions.
 
 ## ✨ Features
 
-- 📊 Sedimentation data analysis
-- 📈 Data visualization and result interpretation
-- 🧮 Analysis of relevant sedimentation parameters
-- 💻 Organized and maintainable source code
-
+- **Text Emotion Detection:** Predicts the emotion expressed in a sentence.
+- **Six Emotion Classes:** Supports sadness, joy, love, anger, fear, and surprise.
+- **BiGRU Deep Learning Model:** Uses a trained neural network for text classification.
+- **Text Preprocessing:** Converts text to lowercase, removes apostrophes and special characters, and normalizes whitespace.
+- **Confidence Score:** Returns the model's probability for the predicted emotion.
+- **Emotion Probabilities:** Provides probability scores for all six emotion classes.
+- **REST API:** Exposes prediction and health-check endpoints using FastAPI.
+- **Web Interface:** Serves the frontend directly through the FastAPI application.
+- **Input Validation:** Validates text input and handles invalid requests.
+- **Model Lifecycle Management:** Loads the trained model and tokenizer when the application starts.
 
 ## 🛠️ Tech Stack
 
-Add the technologies used in this project:
+| Technology | Purpose |
+|---|---|
+| Python | Core programming language |
+| TensorFlow / Keras | Deep-learning model inference |
+| BiGRU | Text emotion classification |
+| NumPy | Numerical operations and probability processing |
+| FastAPI | Backend API development |
+| Pydantic | Request and response validation |
+| Uvicorn | ASGI server |
+| HTML, CSS, JavaScript | Web interface |
+| Jupyter Notebook | Model experimentation and analysis |
+| Pickle | Tokenizer serialization |
 
-- **Programming Language:** [Python / JavaScript / Other]
-- **Frontend:** [If applicable]
-- **Backend:** [If applicable]
-- **Database:** [If applicable]
-- **Libraries:** [Add relevant libraries]
+## 🎭 Supported Emotions
 
-## 🚀 Getting Started
+| Emotion | Emoji |
+|---|---|
+| Sadness | 😢 |
+| Joy | 😄 |
+| Love | ❤️ |
+| Anger | 😠 |
+| Fear | 😨 |
+| Surprise | 😲 |
 
-Follow these steps to set up the project locally.
+## ⚙️ How It Works
 
-### Prerequisites
+The application processes text through the following pipeline:
 
-Install the tools and dependencies required by your project.
-
-For a Python project, you may need:
-
-- Python 3.x
-- pip
-- Git
-
-For other technology stacks, replace these prerequisites accordingly.
-
-### Installation
-
-**1. Clone the repository**
-
-```bash
-git clone https://github.com/prince728/sedimentation-analysis.git
+```text
+        User Input
+            |
+            v
+    Text Preprocessing
+            |
+            v
+   Tokenizer Conversion
+            |
+            v
+    Sequence Padding
+      (Length = 50)
+            |
+            v
+    Trained BiGRU Model
+            |
+            v
+   Emotion Probabilities
+            |
+            v
+  Highest Probability Class
+            |
+            v
+  Predicted Emotion + Emoji
+  Confidence + All Probabilities
+            |
+            v
+       JSON Response
 ```
 
-**2. Navigate to the project directory**
+### Processing steps
 
-```bash
-cd sedimentation-analysis
-```
-
-**3. Install dependencies**
-
-For Python projects:
-
-```bash
-pip install -r requirements.txt
-```
-
-For Node.js projects, use the following command instead if a `package.json` file is present:
-
-```bash
-npm install
-```
-
-**4. Run the project**
-
-Use the appropriate command for your application.
-
-For example, a Python application with an `app.py` entry point can be started using:
-
-```bash
-python app.py
-```
-
-> **Note:** The installation and execution commands depend on the actual project structure and configuration.
+1. **Text input:** The user enters a sentence for analysis.
+2. **Preprocessing:** The application converts text to lowercase, removes apostrophes, replaces special characters with spaces, and removes extra whitespace.
+3. **Tokenization:** The saved tokenizer converts words into integer sequences.
+4. **Padding:** The sequence is padded or truncated to a maximum length of 50 tokens.
+5. **Prediction:** The trained BiGRU model generates probabilities for the six emotion classes.
+6. **Classification:** The class with the highest probability is selected as the predicted emotion.
+7. **Response:** The API returns the original text, predicted emotion, emoji, confidence, and all emotion probabilities.
 
 ## 📂 Project Structure
 
-The project structure depends on the implementation. A possible structure for a Python-based application is:
-
 ```text
 sedimentation-analysis/
-├── data/              # Input datasets
-├── src/               # Source code
-├── tests/             # Test cases
-├── requirements.txt   # Python dependencies
-├── .gitignore
+│
+├── Artifacts/
+│   ├── BiGRU_Model.keras
+│   └── tokenizer.pkl
+│
+├── static/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── main.py
+├── requirements.txt
+├── sedimentation_analysis.ipynb
 └── README.md
 ```
 
-Adjust this structure to match the files and directories in your repository.
+**Key files and directories:**
 
-## 📖 Usage
+- `main.py` — FastAPI application, text preprocessing, model loading, and prediction endpoints.
+- `Artifacts/BiGRU_Model.keras` — Trained BiGRU model used for inference.
+- `Artifacts/tokenizer.pkl` — Saved tokenizer used to convert text into sequences.
+- `static/` — Frontend assets served by FastAPI.
+- `sedimentation_analysis.ipynb` — Jupyter Notebook for model-related experimentation and analysis.
+- `requirements.txt` — Python dependency list.
 
-1. Clone the repository and install the required dependencies.
-2. Prepare the input data in the format supported by the application.
-3. Run the application using the appropriate entry point.
-4. Review the generated analysis and results.
+The frontend filenames above illustrate the intended organization; retain the actual filenames present in your `static/` directory.
 
-Refer to the source code and project documentation for implementation-specific instructions.
+## 🚀 Installation and Setup
 
-## 🧪 Testing
+### Prerequisites
 
-If automated tests are available, run them using the testing framework configured in the project.
+Make sure you have the following installed:
 
-For example, with Python and pytest:
-
-```bash
-pytest
-```
-
-## 🔮 Future Improvements
-
-Potential improvements include:
-
-- Enhanced data visualization
-- Support for additional input formats
-- Improved analysis and reporting
-- Automated testing and validation
-- Performance and usability improvements
-
-## 🤝 Contributing
-
-Contributions and suggestions are welcome.
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Make your changes.
-4. Commit your changes with a descriptive message.
-5. Open a pull request.
-
-## 📄 License
-
-No license information is specified here. Add a `LICENSE` file and update this section according to the license you choose.
-
-## 👨‍💻 Author
-
-**Prince Gupta**
-
-- GitHub: [@prince728](https://github.com/prince728)
-- Project Repository: [sedimentation-analysis](https://github.com/prince728/sedimentation-analysis)
-
----
-
-⭐ If you find this project useful, consider giving the repository a star!
+- Python with a version compatible with the dependencies
+- pip
+- Git
