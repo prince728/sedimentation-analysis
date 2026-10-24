@@ -13,7 +13,6 @@ Sedimentation analysis is the process of studying how suspended particles settle
 - 🧮 Analysis of relevant sedimentation parameters
 - 💻 Organized and maintainable source code
 
-*Update this section to reflect the features currently implemented in the project.*
 
 ## 🛠️ Tech Stack
 
